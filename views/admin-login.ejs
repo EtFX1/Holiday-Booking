@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Admin Login</title>
+    </head>
+    <body>
+        <h1>Admin Login</h1>
+        <form action="/admin/login" method="post">
+            <input
+                type="password"
+                name="password"
+                placeholder="Enter Admin Password"
+                required
+            />
+            <button
+                type="submit"
+                onclick="window.location.href='/admin/main-page'"
+            >
+                Log In
+            </button>
+        </form>
+        <p>Don't have the password? <a href="#">Click here</a></p>
+    </body>
+</html>
