@@ -1,0 +1,16 @@
+{
+    "name": "holiday-booking",
+    "version": "1.0.0",
+    "description": "A simple holiday booking system for staff in a company.",
+    "main": "server.js",
+    "scripts": {
+        "start": "nodemon server.js"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "express": "^4.19.2",
+        "nodemon": "^3.1.4"
+    }
+}
