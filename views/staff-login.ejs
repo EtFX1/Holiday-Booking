@@ -3,36 +3,40 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Admin Login</title>
+        <title>Staff login page</title>
     </head>
     <body>
+        <header>
+            <button onclick="window.location.href='/'">Home icon</button>
+        </header>
         <h1>Staff Login</h1>
-        <form action="/staff/login" method="post">
-            <input
-                type="text"
-                name="first-name"
-                placeholder="Enter First Name"
-                required
-            />
-            <input
-                type="text"
-                name="last-name"
-                placeholder="Enter Last Name"
-                required
-            />
-            <input
-                type="password"
-                name="password"
-                placeholder="Enter Admin Password"
-                required
-            />
-            <button
-                type="submit"
-                onclick="window.location.href='/staff/main-page'"
-            >
-                Log In
-            </button>
-        </form>
-        <p>Don't have the password? <a href="#">Click here</a></p>
+        <main>
+            <form action="/staff/login" method="post">
+                <input
+                    type="text"
+                    name="first-name"
+                    placeholder="Enter First Name"
+                    required
+                />
+                <input
+                    type="text"
+                    name="last-name"
+                    placeholder="Enter Last Name"
+                    required
+                />
+                <input
+                    type="password"
+                    name="password"
+                    placeholder="Enter Admin Password"
+                    required
+                />
+                <button
+                    type="submit"
+                    onclick="window.location.href='/staff/main-page'"
+                >
+                    Log In
+                </button>
+            </form>
+        </main>
     </body>
 </html>

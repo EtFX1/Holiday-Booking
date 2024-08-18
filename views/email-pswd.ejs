@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Email Password Page</title>
+    </head>
+    <body>
+        <header>
+            <button onclick="window.location.href='/'">Home icon</button>
+        </header>
+
+        <main>
+            <h1>Don't have the admin password?</h1>
+            <h2>Don't worry, we got you 😉</h2>
+            <form id="admin-pswd-form" action="/admin/send-pswd" method="post">
+                <input
+                    type="email"
+                    name="email"
+                    placeholder="Enter Your Email"
+                    required
+                />
+                <button type="submit">Send Password</button>
+            </form>
+        </main>
+    </body>
+</html>
