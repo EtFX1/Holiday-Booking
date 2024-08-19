@@ -20,7 +20,7 @@ function sendAdminPassword(userEmail, callback) {
         from: process.env.EMAIL_USER,
         to: userEmail,
         subject: "Your Admin Password",
-        text: `Your admin password is: ${adminPassword}`,
+        text: `The admin password is: ${adminPassword}`,
     };
 
     // Send the email

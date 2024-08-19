@@ -1,48 +1,42 @@
 const express = require("express");
 const router = express.Router();
-const dotenv = require("dotenv");
-const nodemailer = require("nodemailer");
-dotenv.config(); // Load environment variables from .env file
+const bcrypt = require("bcrypt");
+const { promisePool } = require("../services/db"); // Correctly destructure promisePool
 
-const { sendAdminPassword } = require("../services/emailService")
-
-
-router.get("/login", (req, res) => {
-    res.render("admin-login");
-});
-
-//handles a post request for a user to log in
-router.post("/login", (req, res) => {
-    const { password } = req.body;
-
-    if (password === process.env.ADMIN_PASSWORD) {
-        res.redirect("/admin/main-page"); // Redirect to the admin main page if the password is correct
-    } else {
-        res.send("<script>alert('Incorrect password. Please try again.'); window.location.href='/admin/login';</script>");
+// Route to handle loading the main page
+router.get("/main-page", async (req, res) => {
+    try {
+        const [results] = await promisePool.query("SELECT COUNT(*) AS count FROM staff_members");
+        const staffCount = results[0].count;
+        res.render("admin-manage-requests", { staffCount });
+    } catch (err) {
+        console.error("Error fetching staff data: ", err);
+        res.status(500).send("Internal Server Error");
     }
 });
 
-//renders email page
-router.get("/email-pswd", (req, res) => {
-    res.render("email-pswd");
-});
+// Route to handle adding a staff member
+router.post("/add-staff", async (req, res) => {
+    const { firstName, lastName, password, holidayAllowance } = req.body;
 
-// Route to handle the form submission and send the email
-router.post("/send-pswd", (req, res) => {
-    const userEmail = req.body.email;
-    sendAdminPassword(userEmail, (error, info) => {
-        if (error) {
-            console.log(error);
-            res.send("<script>alert('Failed to send email. Please try again.'); window.location.href='/admin/email-pswd';</script>");
-        } else {
-            console.log("Email sent: " + info.response);
-            res.send("<script>alert('Password has been sent to your email.'); window.location.href='/admin/login';</script>");
-        }
-    });
-});
+    try {
+        // Hash the password
+        const hashedPassword = await bcrypt.hash(password, 10);
 
-router.get("/main-page", (req, res) => {
-    res.render("admin-main-page");
+        // Insert the staff member into the database
+        const sql = `
+            INSERT INTO staff_members (first_name, last_name, holiday_allowance_days, password)
+            VALUES (?, ?, ?, ?)
+        `;
+        const values = [firstName, lastName, holidayAllowance, hashedPassword];
+
+        await promisePool.query(sql, values);
+        console.log("Staff member added");
+        res.redirect("/admin/main-page");
+    } catch (err) {
+        console.error("Error handling form submission:", err);
+        res.status(500).send("Server error");
+    }
 });
 
 module.exports = router;

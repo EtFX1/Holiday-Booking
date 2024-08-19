@@ -1,6 +1,8 @@
 const express = require("express"); // Import the express library
-const app = express(); // Create an Express application
+const dotenv = require("dotenv");
+dotenv.config();
 
+const app = express(); // Create an Express application
 
 app.set("view engine", "ejs"); // Set EJS as the view engine
 
@@ -10,19 +12,27 @@ app.use(express.static("public"));
 // Middleware to parse URL-encoded form data (from forms)
 app.use(express.urlencoded({ extended: true }));
 
+// Import database module
+const { pool } = require("./services/db");
+
+// Make the database connection available globally
+app.set("db", pool);
+
+//!Routes
 // Route to serve the HTML file (home page)
 app.get("/", (req, res) => {
     res.sendFile(__dirname + "/public/index.html");
 });
 
-//importing the file that has all the routes we want to go to
+// Import route modules
 const adminRouter = require("./routes/admin");
 const staffRouter = require("./routes/staff");
+const adminLoginRouter = require("./routes/admin-login");
 
-//Any route that has /users, add all the imported routes to the end of it
+// Use route modules
 app.use("/admin", adminRouter);
 app.use("/staff", staffRouter);
-
+app.use("/admin-login", adminLoginRouter);
 
 // Start the server on port 3000
 app.listen(3000, () => {
