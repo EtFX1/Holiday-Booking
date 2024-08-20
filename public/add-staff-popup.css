@@ -1,4 +1,5 @@
 /* Basic styles for the popup */
+
 .popup {
     display: none; /* Hidden by default */
     position: fixed;

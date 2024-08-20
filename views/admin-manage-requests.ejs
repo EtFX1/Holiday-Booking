@@ -4,113 +4,31 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Admin Main Page</title>
-        <link rel="stylesheet" href="/css/admin-manage-requests.css" />
-        <script defer src="/js/admin-manage-requests.js"></script>
     </head>
     <body>
+        <!-- header -->
         <header>
             <button onclick="window.location.href='/'">Home icon</button>
             <button onclick="window.location.href='/admin/login'">
                 Logout
             </button>
         </header>
-        <main>
-            <p>Admin main page</p>
 
+        <main>
+            <!-- navbar -->
             <nav>
                 <ul>
                     <li><a href="#">Manage Requests</a></li>
-                    <li><a href="#">Manage Staff</a></li>
+                    <li><a href="/admin/manage-staff">Manage Staff</a></li>
                 </ul>
             </nav>
 
-            <div>
-                <% if (staffCount === 0) { %>
-                <p>No staff added yet</p>
-
-                <!-- Add Staff Member Button -->
-                <button id="open-popup-btn">Add Staff Member</button>
-
-                <!-- Popup Structure -->
-                <div id="popup-overlay" class="popup-overlay"></div>
-                <div id="popup" class="popup">
-                    <form
-                        id="add-staff-form"
-                        action="/admin/add-staff"
-                        method="post"
-                    >
-                        <!-- set first name field -->
-                        <div>
-                            <label for="firstName">Set First Name</label>
-                            <input
-                                type="text"
-                                id="firstName"
-                                name="firstName"
-                                placeholder="Not more than 15 characters"
-                                maxlength="15"
-                                required
-                            />
-                        </div>
-
-                        <!-- set last name field -->
-                        <div>
-                            <label for="lastName">Set Last Name</label>
-                            <input
-                                type="text"
-                                id="lastName"
-                                name="lastName"
-                                placeholder="Not more than 20 characters"
-                                maxlength="20"
-                                required
-                            />
-                        </div>
-
-                        <!-- set password field -->
-                        <div>
-                            <label for="password">Set Password</label>
-                            <input
-                                type="password"
-                                id="password"
-                                name="password"
-                                placeholder="At least 8 characters"
-                                minlength="8"
-                                required
-                            />
-                            <div
-                                id="password-error"
-                                class="error-message"
-                            ></div>
-                        </div>
-
-                        <!-- set holiday allowace days field -->
-                        <div>
-                            <label for="holidayAllowance"
-                                >Set Holiday Allowance Days</label
-                            >
-                            <input
-                                type="number"
-                                id="holidayAllowance"
-                                name="holidayAllowance"
-                                placeholder="Not more than 30 days"
-                                min="1"
-                                max="30"
-                                required
-                            />
-                            <div
-                                id="holiday-allowance-error"
-                                class="error-message"
-                            ></div>
-                        </div>
-                        <button type="submit">Add Staff Member</button>
-                        <button type="button" id="cancel-popup-btn">
-                            Cancel
-                        </button>
-                    </form>
-                </div>
-                <% } else { %>
-                <p>There are staff members</p>
-                <% } %>
-            </div>
+            <!-- requests section -->
+            <article>
+                <!-- picture here -->
+                <h1>Recent Requests</h1>
+                <p>No requests yet</p>
+            </article>
         </main>
     </body>
 </html>

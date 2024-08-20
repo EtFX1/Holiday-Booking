@@ -19,7 +19,7 @@ const { pool } = require("./services/db");
 app.set("db", pool);
 
 //!Routes
-// Route to serve the HTML file (home page)
+// Route to serve the HTML file (home page) (
 app.get("/", (req, res) => {
     res.sendFile(__dirname + "/public/index.html");
 });

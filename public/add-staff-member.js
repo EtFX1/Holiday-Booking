@@ -1,5 +1,3 @@
-// admin-manage-requests.js
-
 document.addEventListener('DOMContentLoaded', () => {
     const openPopupBtn = document.getElementById('open-popup-btn');
     const popup = document.getElementById('popup');
@@ -11,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const passwordError = document.getElementById('password-error');
     const holidayAllowanceError = document.getElementById('holiday-allowance-error');
 
+    //! Hide and show popup
     // Show popup when 'Add Staff Member' button is clicked
     openPopupBtn.addEventListener('click', () => {
         popup.style.display = 'block';
@@ -28,13 +27,23 @@ document.addEventListener('DOMContentLoaded', () => {
         popupOverlay.style.display = 'none';
     });
 
-    // Validate form inputs on submit
+    //!Validate form inputs on submit
+    function capitalizeFirstLetter(str) {
+        return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+    }
+
     addStaffForm.addEventListener('submit', (e) => {
         let hasErrors = false;
 
         // Clear previous error messages
         passwordError.textContent = '';
         holidayAllowanceError.textContent = '';
+
+        // Capitalize the first letter of first and last names
+        const firstNameInput = document.getElementById('firstName');
+        const lastNameInput = document.getElementById('lastName');
+        firstNameInput.value = capitalizeFirstLetter(firstNameInput.value);
+        lastNameInput.value = capitalizeFirstLetter(lastNameInput.value);
 
         // Password validation
         if (passwordInput.value.length < 8) {
@@ -52,5 +61,6 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault(); // Prevent form submission if there are errors
         }
     });
+
 });
 
