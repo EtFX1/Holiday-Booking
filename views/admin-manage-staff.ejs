@@ -8,6 +8,7 @@
         <link rel="stylesheet" href="/add-staff-popup.css" />
         <script defer src="/add-staff-member.js"></script>
         <script defer src="/delete-staff-member.js"></script>
+        <script defer src="/edit-staff-member.js"></script>
         <!-- New JS file for delete functionality -->
     </head>
     <body>
@@ -35,7 +36,7 @@
             <!-- Add Staff Member Button that opens popup -->
             <button id="open-popup-btn">Add Staff Member</button>
 
-            <!-- Add staff popup -->
+            <!-- Add/edit staff popup -->
             <div id="popup-overlay" class="popup-overlay"></div>
             <article id="popup" class="popup">
                 <form
@@ -89,7 +90,7 @@
                             >Set Holiday Allowance Days</label
                         >
                         <input
-                            type="number"
+                            type="text"
                             id="holidayAllowance"
                             name="holidayAllowance"
                             placeholder="Not more than 30 days"
@@ -129,6 +130,8 @@
                     <div>
                         <!-- stores the first and last name of the staff in the delete button as data attributes -->
                         <button class="edit-btn">Edit</button>
+
+                        <!-- delete -->
                         <button
                             class="delete-btn"
                             data-firstname="<%= member.first_name %>"

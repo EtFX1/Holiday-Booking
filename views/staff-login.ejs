@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Staff login page</title>
+        <title>Staff Login Page</title>
     </head>
     <body>
         <header>
@@ -11,31 +11,44 @@
         </header>
         <h1>Staff Login</h1>
         <main>
-            <form action="/staff/login" method="post">
-                <input
-                    type="text"
-                    name="first-name"
-                    placeholder="Enter First Name"
-                    required
-                />
-                <input
-                    type="text"
-                    name="last-name"
-                    placeholder="Enter Last Name"
-                    required
-                />
-                <input
-                    type="password"
-                    name="password"
-                    placeholder="Enter Password"
-                    required
-                />
-                <button
-                    type="submit"
-                    onclick="window.location.href='/staff/main-page'"
-                >
-                    Log In
-                </button>
+            <form action="/staff-login" method="post">
+                <div>
+                    <input
+                        type="text"
+                        name="first-name"
+                        placeholder="Enter First Name"
+                        required
+                    />
+                    <% if (errors.firstName) { %>
+                    <p class="error-message"><%= errors.firstName %></p>
+                    <% } %>
+                </div>
+
+                <div>
+                    <input
+                        type="text"
+                        name="last-name"
+                        placeholder="Enter Last Name"
+                        required
+                    />
+                    <% if (errors.lastName) { %>
+                    <p class="error-message"><%= errors.lastName %></p>
+                    <% } %>
+                </div>
+
+                <div>
+                    <input
+                        type="password"
+                        name="password"
+                        placeholder="Enter Password"
+                        required
+                    />
+                    <% if (errors.password) { %>
+                    <p class="error-message"><%= errors.password %></p>
+                    <% } %>
+                </div>
+
+                <button type="submit">Log In</button>
             </form>
         </main>
     </body>

@@ -28,6 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     //!Validate form inputs on submit
+    //function that capitalises the first letter
     function capitalizeFirstLetter(str) {
         return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
     }

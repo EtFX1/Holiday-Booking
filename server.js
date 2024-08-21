@@ -27,11 +27,13 @@ app.get("/", (req, res) => {
 // Import route modules
 const adminRouter = require("./routes/admin");
 const staffRouter = require("./routes/staff");
+const staffLoginRouter = require("./routes/staff-login");
 const adminLoginRouter = require("./routes/admin-login");
 
 // Use route modules
 app.use("/admin", adminRouter);
 app.use("/staff", staffRouter);
+app.use("/staff-login", staffLoginRouter);
 app.use("/admin-login", adminLoginRouter);
 
 // Start the server on port 3000

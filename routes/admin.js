@@ -51,6 +51,62 @@ router.post("/add-staff", async (req, res) => {
     }
 });
 
+//!Editing and deleting logic
+
+// Route to fetch staff member details by first and last name
+router.get('/get-staff', async (req, res) => {
+    const { firstName, lastName } = req.query;
+
+    try {
+        const [staff] = await promisePool.query(
+            "SELECT * FROM staff_members WHERE first_name = ? AND last_name = ?",
+            [firstName, lastName]
+        );
+
+        if (staff.length > 0) {
+            console.log(staff[0]); // Add this line to log the retrieved staff data to the console
+            res.json(staff[0]); // Send back the staff member's details
+        } else {
+            res.status(404).json({ error: 'Staff member not found' });
+        }
+    } catch (err) {
+        console.error('Error fetching staff member:', err);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
+// Route to handle updating a staff member's details
+router.post("/update-staff", async (req, res) => {
+    const { firstName, lastName, password, holidayAllowance } = req.body;
+
+    try {
+        // Check if a new password was provided and hash it if necessary
+        let hashedPassword = null;
+        if (password) {
+            hashedPassword = await bcrypt.hash(password, 10);
+        }
+
+        // SQL query to update the staff member's details
+        const sql = `
+            UPDATE staff_members
+            SET first_name = ?, last_name = ?, holiday_allowance_days = ?
+            ${hashedPassword ? ', password = ?' : ''}
+            WHERE first_name = ? AND last_name = ?
+        `;
+        const values = hashedPassword
+            ? [firstName, lastName, holidayAllowance, hashedPassword, firstName, lastName]
+            : [firstName, lastName, holidayAllowance, firstName, lastName];
+
+        await promisePool.query(sql, values);
+        console.log("Staff member updated");
+        res.redirect("/admin/manage-staff");
+    } catch (err) {
+        console.error("Error updating staff member:", err);
+        res.status(500).send("Server error");
+    }
+});
+
+
 // Route to handle deleting a staff member (req. from admin-manage-staff.ejs)
 router.post("/delete-staff", async (req, res) => {
     const { firstName, lastName } = req.body; // gets the first and last names from the form 
