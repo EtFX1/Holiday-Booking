@@ -3,9 +3,117 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Staff main page</title>
+        <title>Staff Main Page</title>
+        <!-- Include Flatpickr library -->
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"
+        />
+        <style>
+            /* Additional styling for date picker */
+            .date-picker {
+                margin-bottom: 20px;
+            }
+            .error-message {
+                color: red;
+                font-size: 0.875em;
+            }
+
+            /* Styling for the reason textarea */
+            #reason-container {
+                position: relative;
+                margin-bottom: 20px;
+            }
+
+            textarea#reason {
+                /* width: 100%; */
+                padding: 8px;
+                box-sizing: border-box;
+                font-size: 1em;
+                resize: none; /* Disable manual resizing */
+                overflow: hidden;
+                transition: all 0.3s ease; /* Smooth transition for height */
+            }
+
+            /* Expand textarea when focused */
+            textarea#reason:focus {
+                height: 100px; /* Expand to 100px height on focus */
+                outline: none; /* Remove the default outline */
+            }
+
+            #char-count {
+                position: absolute;
+                bottom: -20px;
+                right: 0;
+                font-size: 0.875em;
+                color: #666;
+            }
+        </style>
+        <script defer src="/dates.js"></script>
     </head>
     <body>
-        Staff Main Page
+        <!-- !navbar -->
+        <header>
+            <button onclick="window.location.href='/'">Home icon</button>
+            <button onclick="window.location.href='/staff-login'">
+                Logout
+            </button>
+        </header>
+
+        <!-- !Metrics section -->
+        <article>
+            <div>
+                <h2>HOLIDAY ALLOWANCE DAYS</h2>
+                <p><%= holidayAllowance %></p>
+            </div>
+
+            <div>
+                <h2>HOLIDAY DAYS LEFT</h2>
+                <p id="days-left"></p>
+            </div>
+
+            <div>
+                <h2>UP & COMING HOLIDAYS</h2>
+                <p></p>
+            </div>
+        </article>
+
+        <!-- !Heading 2 -->
+        <h2>Book your holiday</h2>
+        <form action="/staff/request-holiday" method="post">
+            <input type="hidden" name="staff-id" value="<%= staffId %>" />
+            <input type="hidden" name="days-requested" id="days-requested" />
+
+            <h3>Start Date</h3>
+            <div id="start-date" class="date-picker">
+                <input type="text" id="start-date-picker" name="start-date" />
+            </div>
+
+            <h3>End Date</h3>
+            <div id="end-date" class="date-picker">
+                <input type="text" id="end-date-picker" name="end-date" />
+            </div>
+
+            <h3>Reason for holiday</h3>
+            <div id="reason-container">
+                <textarea
+                    id="reason"
+                    name="reason"
+                    rows="1"
+                    maxlength="300"
+                    placeholder="Not > 300 characters"
+                ></textarea>
+            </div>
+
+            <h3>No. of days</h3>
+            <p id="number-of-days"></p>
+
+            <button type="submit">Send Request</button>
+
+            <div id="error-message" class="error-message"></div>
+        </form>
+
+        <!-- Include Flatpickr JavaScript -->
+        <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     </body>
 </html>

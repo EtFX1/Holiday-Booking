@@ -12,18 +12,16 @@
         <!-- New JS file for delete functionality -->
     </head>
     <body>
-        <!-- header -->
+        <!-- !Header -->
         <header>
             <button onclick="window.location.href='/'">Home icon</button>
-            <button onclick="window.location.href='/admin/login'">
+            <button onclick="window.location.href='/admin-login'">
                 Logout
             </button>
         </header>
 
         <main>
-            <p>Admin main page</p>
-
-            <!-- Navbar -->
+            <!--! Navbar -->
             <nav>
                 <ul>
                     <li><a href="#">Manage Requests</a></li>
@@ -31,12 +29,13 @@
                 </ul>
             </nav>
 
+            <!-- !Heading -->
             <h1>Staff List</h1>
 
             <!-- Add Staff Member Button that opens popup -->
             <button id="open-popup-btn">Add Staff Member</button>
 
-            <!-- Add/edit staff popup -->
+            <!-- !Add/edit staff popup -->
             <div id="popup-overlay" class="popup-overlay"></div>
             <article id="popup" class="popup">
                 <form
@@ -108,7 +107,7 @@
                 </form>
             </article>
 
-            <!-- !Container for staff list -->
+            <!-- @!Container for staff list -->
             <article>
                 <% if (staffMembers.length === 0) { %>
                 <!-- No staff added yet -->
@@ -116,7 +115,8 @@
                 <% } else { %>
                 <!-- Loop through the staff member list and generate HTML for each staff member -->
                 <% staffMembers.forEach(member => { %>
-                <!-- Staff Member credentials -->
+
+                <!-- !Staff Member credentials -->
                 <section>
                     <!-- name container -->
                     <div>
